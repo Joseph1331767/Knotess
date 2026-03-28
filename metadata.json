@@ -1,0 +1,5 @@
+{
+  "name": "Infinite Node Graph",
+  "description": "A 2D node graph visualizer and editor with infinite zoom and nested nodes.",
+  "requestFramePermissions": []
+}
