@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #050505;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Flow animation for dashed links */
+@keyframes flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+.animate-flow {
+  animation: flow 1s linear infinite;
+}
+
+/* LOD: Star — white glowing dot (deep depth) */
+.lod-star {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, #ffffff 40%, rgba(255,255,255,0.6) 70%, transparent 100%) !important;
+  border: none !important;
+  overflow: hidden;
+  box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.5) !important;
+}
+.lod-star * {
+  display: none !important;
+}
+
+/* LOD: Shape — empty box, no text */
+.lod-shape {
+  min-height: 40px !important;
+}
+.lod-shape .node-text-content,
+.lod-shape .node-actions,
+.lod-shape > button {
+  display: none !important;
+}
+
+/* LOD: Compact — title only, no description */
+.lod-compact {
+  padding: 8px 12px !important;
+}
+.lod-compact .node-description,
+.lod-compact .node-actions,
+.lod-compact > button {
+  display: none !important;
+}
+
+svg {
+  pointer-events: none;
+}

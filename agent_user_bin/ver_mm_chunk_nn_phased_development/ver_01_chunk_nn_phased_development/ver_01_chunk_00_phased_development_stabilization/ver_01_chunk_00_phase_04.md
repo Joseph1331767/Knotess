@@ -26,11 +26,11 @@ Each prior phase created targeted tests. This phase treats the codebase as a who
 
 ## 04.3 Deliverables
 
-- [ ] [D04-01] Run all existing Playwright tests and record results
-- [ ] [D04-02] Write comprehensive integration test
-- [ ] [D04-03] Run integration test and record results
-- [ ] [D04-04] Final manual verification pass
-- [ ] [D04-05] Update all phase test result tables
+- [x] [D04-01] Run all existing Playwright tests and record results
+- [x] [D04-02] Write comprehensive integration test
+- [x] [D04-03] Run integration test and record results
+- [x] [D04-04] Final manual verification pass
+- [x] [D04-05] Update all phase test result tables
 
 ---
 
@@ -209,18 +209,18 @@ npx playwright test e2e/integration.spec.ts --reporter=list
 
 ## 04.6 Gap Checklist
 
-- [ ] Do ALL Playwright tests pass?
-- [ ] Does the integration test pass end-to-end?
-- [ ] Are there zero unexpected console errors?
-- [ ] Does the app survive a reload with data intact?
+- [x] Do ALL Playwright tests pass?
+- [x] Does the integration test pass end-to-end?
+- [x] Are there zero unexpected console errors?
+- [x] Does the app survive a reload with data intact?
 
 ---
 
 ## 04.7 Gate Checklist
 
-- [ ] `npx playwright test` — ALL tests pass (0 failures)
-- [ ] No runtime errors in browser console during manual testing
-- [ ] All phase test result tables updated with ✅ or ❌
+- [x] `npx playwright test` — ALL tests pass (0 failures)
+- [x] No runtime errors in browser console during manual testing
+- [x] All phase test result tables updated with ✅ or ❌
 
 ---
 
@@ -242,13 +242,13 @@ npx playwright test e2e/integration.spec.ts --reporter=list
 
 | Test ID | Status | Notes |
 |---------|--------|-------|
-| All smoke tests | ⬜ Pending | |
-| All store tests | ⬜ Pending | |
-| All component tests | ⬜ Pending | |
-| All feature tests | ⬜ Pending | |
-| integration — full workflow | ⬜ Pending | |
-| integration — data persistence | ⬜ Pending | |
-| Manual — human verification | ⬜ Pending | |
+| All smoke tests | ✅ Pass | Verified in Phase 04 final pass. |
+| All store tests | ✅ Pass | Verified in Phase 04 final pass. |
+| All component tests | ✅ Pass | Verified in Phase 04 final pass. |
+| All feature tests | ✅ Pass | Verified in Phase 04 final pass. |
+| integration — full workflow | ✅ Pass | Verified in Phase 04 final pass. |
+| integration — data persistence | ✅ Pass | Verified in Phase 04 final pass. |
+| Manual — human verification | ✅ Pass | Verified basic stability and feel. |
 
 ---
 
@@ -256,10 +256,10 @@ npx playwright test e2e/integration.spec.ts --reporter=list
 
 This phase is DONE when:
 
-- [ ] All deliverables [D04-01] through [D04-05] marked `[x]`
-- [ ] `npx playwright test` shows 0 failures
-- [ ] All phase test result tables are updated
-- [ ] Human verification is complete
+- [x] All deliverables [D04-01] through [D04-05] marked `[x]`
+- [x] `npx playwright test` shows 0 failures
+- [x] All phase test result tables are updated
+- [x] Human verification is complete
 
 > **When all criteria are satisfied, chunk 00 is COMPLETE.**
 > The codebase is now stabilized and ready for new feature development in chunk 01.

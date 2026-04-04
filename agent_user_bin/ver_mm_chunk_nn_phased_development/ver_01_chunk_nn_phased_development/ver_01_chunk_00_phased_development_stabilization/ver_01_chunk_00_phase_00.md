@@ -31,18 +31,18 @@ The codebase contains unused files, unused npm dependencies, leftover debug arti
 
 ## 00.3 Deliverables
 
-- [ ] [D00-01] Delete `hooks/use-mobile.ts`
-- [ ] [D00-02] Delete `lib/utils.ts`
-- [ ] [D00-03] Remove unused dependencies from `package.json`
-- [ ] [D00-04] Remove debug banner from `app/page.tsx`
-- [ ] [D00-05] Remove all `console.log` statements from source files
-- [ ] [D00-06] Delete `.eslintrc.json`
-- [ ] [D00-07] Add `no-console` rule to `eslint.config.mjs`
-- [ ] [D00-08] Remove `output: 'standalone'` from `next.config.ts`
-- [ ] [D00-09] Rename package to `knotess` in `package.json`
-- [ ] [D00-10] Add `@reserved` JSDoc to `NodeData.color` and `AppState.theme` in `lib/store.ts`
-- [ ] [D00-11] Install and configure Playwright
-- [ ] [D00-12] Write Playwright smoke test
+- [x] [D00-01] Delete `hooks/use-mobile.ts`
+- [x] [D00-02] Delete `lib/utils.ts`
+- [x] [D00-03] Remove unused dependencies from `package.json`
+- [x] [D00-04] Remove debug banner from `app/page.tsx`
+- [x] [D00-05] Remove all `console.log` statements from source files
+- [x] [D00-06] Delete `.eslintrc.json`
+- [x] [D00-07] Add `no-console` rule to `eslint.config.mjs`
+- [x] [D00-08] Remove `output: 'standalone'` from `next.config.ts`
+- [x] [D00-09] Rename package to `knotess` in `package.json`
+- [x] [D00-10] Add `@reserved` JSDoc to `NodeData.color` and `AppState.theme` in `lib/store.ts`
+- [x] [D00-11] Install and configure Playwright
+- [x] [D00-12] Write Playwright smoke test
 
 ---
 
@@ -318,10 +318,10 @@ test.describe('Knotess Smoke Tests', () => {
 
 ## 00.7 Gate Checklist
 
-- [ ] `npm run dev` starts without errors
-- [ ] `npx playwright test` runs the smoke test and it passes
-- [ ] No `console.log` matches found in source code
-- [ ] `package.json` has name `knotess` and no unused dependencies
+- [x] `npm run dev` starts without errors
+- [x] `npx playwright test` runs the smoke test and it passes
+- [x] No `console.log` matches found in source code
+- [x] `package.json` has name `knotess` and no unused dependencies
 
 ---
 
@@ -342,8 +342,8 @@ test.describe('Knotess Smoke Tests', () => {
 
 | Test ID | Status | Notes |
 |---------|--------|-------|
-| smoke.spec.ts — app loads | ⬜ Pending | |
-| smoke.spec.ts — canvas interactive | ⬜ Pending | |
+| smoke.spec.ts — app loads | ✅ Pass | |
+| smoke.spec.ts — canvas interactive | ✅ Pass | |
 
 ---
 

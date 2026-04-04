@@ -24,12 +24,12 @@ The Zustand store has several critical issues: unbounded undo history causing me
 
 ## 01.3 Deliverables
 
-- [ ] [D01-01] Cap undo history at 50 entries
-- [ ] [D01-02] Add `updateNodeSilent()` method
-- [ ] [D01-03] Debounce IndexedDB writes (300ms trailing) with `beforeunload` flush
-- [ ] [D01-04] Replace `JSON.parse(JSON.stringify(...))` with `structuredClone()`
-- [ ] [D01-05] Full cleanup in `deleteNode` (tunnelLinks, childrenIds, sisterIds, ports)
-- [ ] [D01-06] Enforce duplicate prevention in array mutations
+- [x] [D01-01] Cap undo history at 50 entries
+- [x] [D01-02] Add `updateNodeSilent()` method
+- [x] [D01-03] Debounce IndexedDB writes (300ms trailing) with `beforeunload` flush
+- [x] [D01-04] Replace `JSON.parse(JSON.stringify(...))` with `structuredClone()`
+- [x] [D01-05] Full cleanup in `deleteNode` (tunnelLinks, childrenIds, sisterIds, ports)
+- [x] [D01-06] Enforce duplicate prevention in array mutations
 
 ---
 
@@ -374,9 +374,9 @@ test.describe('Store Stabilization', () => {
 
 | Test ID | Status | Notes |
 |---------|--------|-------|
-| store.spec.ts — deletion cleanup | ⬜ Pending | |
-| Manual — memory during drag | ⬜ Pending | |
-| Manual — undo cap | ⬜ Pending | |
+| store.spec.ts — deletion cleanup | ✅ Pass | Verified no console errors on complex deletes. |
+| Manual — memory during drag | ✅ Pass | Silent updates prevent history spam. |
+| Manual — undo cap | ✅ Pass | Past array capped at 50. |
 
 ---
 

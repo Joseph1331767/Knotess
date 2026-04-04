@@ -30,15 +30,15 @@ The app lacks basic interactive features that users expect from any productivity
 
 ## 03.3 Deliverables
 
-- [ ] [D03-01] Create `useKeyboardShortcuts` hook
-- [ ] [D03-02] Wire keyboard shortcuts into Canvas
-- [ ] [D03-03] Add `window.confirm()` to destructive actions
-- [ ] [D03-04] Add auto-save indicator to toolbar
-- [ ] [D03-05] Add search input to sidebar
-- [ ] [D03-06] Create ErrorBoundary component
-- [ ] [D03-07] Wrap app in ErrorBoundary
-- [ ] [D03-08] Create ZoomControls component
-- [ ] [D03-09] Add ZoomControls to Canvas
+- [x] [D03-01] Create `useKeyboardShortcuts` hook
+- [x] [D03-02] Wire keyboard shortcuts into Canvas
+- [x] [D03-03] Add `window.confirm()` to destructive actions
+- [x] [D03-04] Add auto-save indicator to toolbar
+- [x] [D03-05] Add search input to sidebar
+- [x] [D03-06] Create ErrorBoundary component
+- [x] [D03-07] Wrap app in ErrorBoundary
+- [x] [D03-08] Create ZoomControls component
+- [x] [D03-09] Add ZoomControls to Canvas
 
 ---
 
@@ -542,23 +542,23 @@ import { ZoomControls } from './ZoomControls';
 
 ## 03.6 Gap Checklist
 
-- [ ] Do Ctrl+Z/Ctrl+Y work for undo/redo?
-- [ ] Does Ctrl+S save (and update the auto-save indicator)?
-- [ ] Does Delete key show a confirmation before deleting?
-- [ ] Does Escape deselect all nodes?
-- [ ] Does the sidebar search filter nodes correctly?
-- [ ] Does the error boundary catch errors and show the fallback?
-- [ ] Do zoom controls (+, −, fit-to-view) work?
-- [ ] Do shortcuts NOT fire while typing in a text input?
+- [x] Do Ctrl+Z/Ctrl+Y work for undo/redo?
+- [x] Does Ctrl+S save (and update the auto-save indicator)?
+- [x] Does Delete key show a confirmation before deleting?
+- [x] Does Escape deselect all nodes?
+- [x] Does the sidebar search filter nodes correctly?
+- [x] Does the error boundary catch errors and show the fallback?
+- [x] Do zoom controls (+, −, fit-to-view) work?
+- [x] Do shortcuts NOT fire while typing in a text input?
 
 ---
 
 ## 03.7 Gate Checklist
 
-- [ ] `npm run dev` starts without errors
-- [ ] All existing Playwright tests pass
-- [ ] New Playwright tests for shortcuts and search pass
-- [ ] Error boundary renders fallback when a component throws
+- [x] `npm run dev` starts without errors
+- [x] All existing Playwright tests pass
+- [x] New Playwright tests for shortcuts and search pass
+- [x] Error boundary renders fallback when a component throws
 
 ---
 
@@ -666,11 +666,11 @@ test.describe('Standard Features', () => {
 
 | Test ID | Status | Notes |
 |---------|--------|-------|
-| features.spec.ts — Ctrl+Z undo | ⬜ Pending | |
-| features.spec.ts — Escape deselect | ⬜ Pending | |
-| features.spec.ts — sidebar search | ⬜ Pending | |
-| features.spec.ts — zoom controls | ⬜ Pending | |
-| features.spec.ts — confirmation dialog | ⬜ Pending | |
+| features.spec.ts — Ctrl+Z undo | ✅ Pass | Verified in playwright run |
+| features.spec.ts — Escape deselect | ✅ Pass | Verified in playwright run |
+| features.spec.ts — sidebar search | ✅ Pass | Verified in playwright run |
+| features.spec.ts — zoom controls | ✅ Pass | Verified in playwright run |
+| features.spec.ts — confirmation dialog | ✅ Pass | Verified in playwright run |
 
 ---
 
@@ -678,10 +678,10 @@ test.describe('Standard Features', () => {
 
 This phase is DONE when:
 
-- [ ] All deliverables [D03-01] through [D03-09] marked `[x]`
-- [ ] All gap checklist items answered affirmatively
-- [ ] All gate checklist items passing
-- [ ] All verification tests passing
-- [ ] Test results table updated
+- [x] All deliverables [D03-01] through [D03-09] marked `[x]`
+- [x] All gap checklist items answered affirmatively
+- [x] All gate checklist items passing
+- [x] All verification tests passing
+- [x] Test results table updated
 
 > Proceed to Phase 04 only after all criteria are satisfied.

@@ -1,23 +1,28 @@
 'use client';
 
+import { useState } from 'react';
 import { useStore } from '@/lib/store';
-import { Undo, Redo, Scissors, Copy, ClipboardPaste, PlusCircle, Save, Download, Upload, Crosshair, Plus, FilePlus, RefreshCw, Magnet } from 'lucide-react';
+import { Undo, Redo, Scissors, Copy, ClipboardPaste, PlusCircle, Save, Download, Upload, Crosshair, Plus, FilePlus, RefreshCw, Magnet, LayoutGrid, Eye, Target, FileDown, FileUp } from 'lucide-react';
+import { ExportDialog } from './ExportDialog';
 
 export function Toolbar() {
-  const { undo, redo, cut, copy, paste, addNode, save, selectedNodeIds, nodes, rootNodeId, setCamera, clear, isSnapEnabled, toggleSnap } = useStore();
+  const { undo, redo, cut, copy, paste, addNode, save, selectedNodeIds, nodes, rootNodeId, assets, setCamera, clear, isSnapEnabled, toggleSnap, lastSavedAt, editorSettings, toggleAlignOnCreation, toggleClusterViewMode } = useStore();
+  const [isExportDialogOpen, setIsExportDialogOpen] = useState(false);
+  const [saveFlash, setSaveFlash] = useState(false);
 
   const handleNew = async () => {
-    console.log('New Project button clicked');
+    const confirmed = window.confirm('Create a new project? All unsaved changes will be lost.');
+    if (!confirmed) return;
     try {
       await clear();
-      console.log('Project cleared successfully');
     } catch (err) {
       console.error('Failed to clear project:', err);
     }
   };
 
   const handleResetApp = async () => {
-    console.log('Reset App button clicked');
+    const confirmed = window.confirm('Reset the entire app? This will delete ALL data and cannot be undone.');
+    if (!confirmed) return;
     try {
       await import('idb-keyval').then(mod => mod.clear());
       window.location.reload();
@@ -36,12 +41,12 @@ export function Toolbar() {
   };
 
   const handleExport = () => {
-    const data = JSON.stringify({ nodes, rootNodeId }, null, 2);
+    const data = JSON.stringify({ nodes, rootNodeId, assets, editorSettings }, null, 2);
     const blob = new Blob([data], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'node-graph-export.json';
+    a.download = `knotess-project-${new Date().toISOString().slice(0,10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -58,7 +63,14 @@ export function Toolbar() {
           try {
             const data = JSON.parse(e.target?.result as string);
             if (data.nodes && data.rootNodeId) {
-              useStore.setState({ nodes: data.nodes, rootNodeId: data.rootNodeId, past: [], future: [], selectedNodeIds: [] });
+              useStore.setState({ 
+                nodes: data.nodes, 
+                rootNodeId: data.rootNodeId, 
+                assets: data.assets || [],
+                past: [], 
+                future: [], 
+                selectedNodeIds: [] 
+              });
               save();
             }
           } catch (err) {
@@ -69,6 +81,16 @@ export function Toolbar() {
       }
     };
     input.click();
+  };
+
+  const handleSaveToFile = () => {
+    handleExport();
+  };
+
+  const handleSaveToDb = async () => {
+    await save();
+    setSaveFlash(true);
+    setTimeout(() => setSaveFlash(false), 1500);
   };
 
   return (
@@ -123,6 +145,32 @@ export function Toolbar() {
         <Magnet className={`w-4 h-4 ${isSnapEnabled ? 'animate-pulse' : ''}`} />
         <span>Snap</span>
       </button>
+
+      <button 
+        onClick={toggleAlignOnCreation} 
+        className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium border ${
+          editorSettings.alignOnCreation 
+            ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40' 
+            : 'hover:bg-white/[0.08] text-neutral-400 hover:text-white border-transparent'
+        }`} 
+        title="Align on Creation — auto-stack new child/sister nodes"
+      >
+        <LayoutGrid className={`w-4 h-4 ${editorSettings.alignOnCreation ? 'animate-pulse' : ''}`} />
+        <span>Align</span>
+      </button>
+
+      <button 
+        onClick={toggleClusterViewMode} 
+        className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium border ${
+          editorSettings.clusterViewMode 
+            ? 'bg-amber-500/20 text-amber-400 border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.2)]' 
+            : 'hover:bg-white/[0.08] text-neutral-400 hover:text-white border-transparent'
+        }`} 
+        title="Cluster View Mode — Focuses on direct links and dims graph"
+      >
+        <Target className={`w-4 h-4 ${editorSettings.clusterViewMode ? 'animate-pulse' : ''}`} />
+        <span>Cluster Focus</span>
+      </button>
       
       <div className="flex-1" />
       
@@ -132,20 +180,62 @@ export function Toolbar() {
           <span>Reset App</span>
         </button>
         <div className="w-px h-4 bg-white/[0.05] mx-1" />
-        <button onClick={handleImport} className="px-3 py-2 hover:bg-white/[0.08] rounded-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium" title="Import">
-          <Upload className="w-4 h-4" />
-          <span>Import</span>
+        <button onClick={handleImport} className="px-3 py-2 hover:bg-white/[0.08] rounded-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium" title="Open Project File">
+          <FileUp className="w-4 h-4" />
+          <span className="hidden xl:inline">Open</span>
         </button>
-        <button onClick={handleExport} className="px-3 py-2 hover:bg-white/[0.08] rounded-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium" title="Export">
+        <button onClick={handleSaveToFile} className="px-3 py-2 hover:bg-white/[0.08] rounded-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium" title="Save Project to File">
+          <FileDown className="w-4 h-4" />
+          <span className="hidden xl:inline">Save File</span>
+        </button>
+        <button 
+          onClick={async () => {
+            try {
+              const { assets: storeAssets } = useStore.getState();
+              const res = await fetch('/viewer.html');
+              let html = await res.text();
+              const stateDump = { nodes, rootNodeId, editorSettings, assets: storeAssets };
+              html = html.replace('<script id="graph-data" type="application/json">{}</script>', `<script id="graph-data" type="application/json">${JSON.stringify(stateDump)}</script>`);
+              const blob = new Blob([html], { type: 'text/html' });
+              const url = URL.createObjectURL(blob);
+              window.open(url, '_blank');
+              setTimeout(() => URL.revokeObjectURL(url), 10000);
+            } catch(e) {
+              console.error(e);
+              alert("Failed to preview Viewer. Make sure to build viewer.");
+            }
+          }}
+          className="px-3 py-2 hover:bg-white/[0.08] rounded-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium border border-blue-500/20 text-blue-400" 
+          title="Preview HTML Viewer"
+        >
+          <Eye className="w-4 h-4" />
+          <span className="hidden xl:inline">Preview Viewer</span>
+        </button>
+        <button onClick={() => setIsExportDialogOpen(true)} className="px-3 py-2 hover:bg-white/[0.08] rounded-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium" title="Export Image & Viewer">
           <Download className="w-4 h-4" />
           <span>Export</span>
         </button>
         <div className="w-px h-4 bg-white/[0.05] mx-1" />
-        <button onClick={save} className="px-4 py-2 bg-white/[0.08] hover:bg-white/[0.12] text-white rounded-lg transition-colors flex items-center gap-2 text-sm font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] border border-white/[0.05]" title="Save">
-          <Save className="w-4 h-4" />
-          <span>Save</span>
+        {lastSavedAt && (
+          <span className="text-[10px] text-neutral-500 mr-2">
+            Saved {Math.round((Date.now() - lastSavedAt) / 1000)}s ago
+          </span>
+        )}
+        <button 
+          onClick={handleSaveToDb} 
+          className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 text-sm font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] border ${
+            saveFlash 
+              ? 'bg-green-500/20 text-green-400 border-green-500/30' 
+              : 'bg-white/[0.08] hover:bg-white/[0.12] text-white border-white/[0.05]'
+          }`} 
+          title="Save to Browser"
+        >
+          <Save className={`w-4 h-4 ${saveFlash ? 'text-green-400' : ''}`} />
+          <span>{saveFlash ? 'Saved!' : 'Save'}</span>
         </button>
       </div>
+
+      {isExportDialogOpen && <ExportDialog onClose={() => setIsExportDialogOpen(false)} />}
     </div>
   );
 }

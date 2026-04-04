@@ -1,0 +1,16 @@
+- we need a zoomout dev-tuneable threshold system that can control the visual state of the system. extra tiny nodes in screen space should be culled, and nodes that are just tiny should be rendered as a white star with title popup on hover. and medium tiny nodes should render the node but hide the description making the title/name as large in the rendered node as possible. and nodes that arent tiny at all just get rendered normally. so thats a scale of sizes that should be tuneable. 
+
+- we currently have spell check but no right click to select correct word. so we will be adding that. 
+- we need stt capabilities for quick text input. 
+- bug 01: notice a crash/freez when double clicking ports and draging the mouse around etc. 
+
+- notice theres no way to add a new link if one got deleted. so we will make a new mode and have 4 modes now, child, sister, buss and the new mode is route. route connects parents to children and sisters to sisters, and cross tunnels and resolves the path style automatically, with parent-children paths being the regular parent to children style, same with sis-sis and any connection besides (par-chi:sis-sis) will count as a tunnel. this new mode makes our legacy 'link' button redundant so we will be removing the link btn. 
+- the "+" btn for the 4 modes is often stuck behind a port, so we need to move it away from the perimeter of the node. the new location for the '+" button will be where the legacy 'link' button was located. and if a user wants to drag the '+' to the perimeter to select a port location as the legacy code already does then thats allowed, we just need to detect a drag to perimeter and snap to perimeter. 
+- should be able to select something or a group, then right click on another node and have alignment options. 
+- should be able to select a group and 'scale' the group. this is a special scallar that just increases the distances between nodes in that group, keeping their relative position to eachother. 
+- should have a toggle named 'align on creation'. when on, children nodes auto stack in a column (under the first one placed), as many rows. and sisters of children should auto stack to the right or left of what they are linked to depending on flow. 
+- export btn should give the option to export as a fully rendered image (nodes, descriptions and links only, not internal content.)
+- export btn should give the option to export as a single file html viewer (same env, no editing, pure viewer, full working clickable nodes, including their internals, and the viewer should have an export to jpeg btn as well.., no dev controlls): note since we are technically making a "viewer" that rides with the export data in a single file, we should also have a "preview btn" in the editor that shows the current file in the actual viewer. 
+- the system settings tab is weak, it doesnt contain a professional suite of settings for the editor env, setting connection link themes, color palate themes: primary, secondary, thrid., general font themes and a surplus of effects and mechanics. 
+- theres no clear plan for an electron wrapper, and standard windows icons, system trays, etc. no splash screen. 
+- there should be a file explorer, and a workspace explorer. we can copy mechanics from vscode software ui for the explorers.

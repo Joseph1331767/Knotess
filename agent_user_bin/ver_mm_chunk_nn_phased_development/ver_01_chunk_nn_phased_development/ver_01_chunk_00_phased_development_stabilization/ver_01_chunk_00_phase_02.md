@@ -25,14 +25,14 @@ Components have memory leaks from window event listeners not cleaned on unmount,
 
 ## 02.3 Deliverables
 
-- [ ] [D02-01] AbortController pattern for all window event listeners in `Node.tsx`
-- [ ] [D02-02] `clearTimeout` cleanup for `clickTimeoutRef` on unmount in `Node.tsx`
-- [ ] [D02-03] ResizeObserver for height measurement in `Node.tsx`
-- [ ] [D02-04] Use `updateNodeSilent` during drag operations in `Node.tsx`
-- [ ] [D02-05] `useRef` camera pattern for wheel listener in `Canvas.tsx`
-- [ ] [D02-06] `useRef` camera pattern for wheel listener in `NodeEditor.tsx`
-- [ ] [D02-07] Move `setActivePageId` into `useEffect` in `NodeEditor.tsx`
-- [ ] [D02-08] Shared ref map for port positions in `Canvas.tsx` (replace DOM query)
+- [x] [D02-01] AbortController pattern for all window event listeners in `Node.tsx`
+- [x] [D02-02] `clearTimeout` cleanup for `clickTimeoutRef` on unmount in `Node.tsx`
+- [x] [D02-03] ResizeObserver for height measurement in `Node.tsx`
+- [x] [D02-04] Use `updateNodeSilent` during drag operations in `Node.tsx`
+- [x] [D02-05] `useRef` camera pattern for wheel listener in `Canvas.tsx`
+- [x] [D02-06] `useRef` camera pattern for wheel listener in `NodeEditor.tsx`
+- [x] [D02-07] Move `setActivePageId` into `useEffect` in `NodeEditor.tsx`
+- [x] [D02-08] Shared ref map for port positions in `Canvas.tsx` (replace DOM query)
 
 ---
 
@@ -552,8 +552,9 @@ test.describe('Component Fixes', () => {
 
 | Test ID | Status | Notes |
 |---------|--------|-------|
-| components.spec.ts — drag | ⬜ Pending | |
-| components.spec.ts — editor open/close | ⬜ Pending | |
+| components.spec.ts — drag | ✅ Pass | Smooth dragging, zero history spam. |
+| components.spec.ts — editor open/close | ✅ Pass | Validated page switching and active page detection. |
+| store.spec.ts — deletion | ✅ Pass | Verified graph integrity after multi-node deletion. |
 
 ---
 
@@ -561,10 +562,10 @@ test.describe('Component Fixes', () => {
 
 This phase is DONE when:
 
-- [ ] All deliverables [D02-01] through [D02-08] marked `[x]`
-- [ ] All gap checklist items answered affirmatively
-- [ ] All gate checklist items passing
-- [ ] All verification tests passing
-- [ ] Test results table updated
+- [x] All deliverables [D02-01] through [D02-08] marked `[x]`
+- [x] All gap checklist items answered affirmatively
+- [x] All gate checklist items passing
+- [x] All verification tests passing
+- [x] Test results table updated
 
 > Proceed to Phase 03 only after all criteria are satisfied.
